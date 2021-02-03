@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Grocery List
+
+This is a grocery list built using React and AWS Amplify.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
