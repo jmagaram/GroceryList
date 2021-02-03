@@ -6,9 +6,11 @@ export function CategoryManager() {
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
-    DataStore.query(Category).then((i) => setCategories(i));
-    const subscription = DataStore.observe(Category).subscribe(async (_) => {
+    const queryCategories = async () =>
       setCategories(await DataStore.query(Category));
+    queryCategories();
+    const subscription = DataStore.observe(Category).subscribe(async (_) => {
+      queryCategories();
       return () => {
         subscription.unsubscribe();
       };
