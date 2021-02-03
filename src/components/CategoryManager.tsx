@@ -8,9 +8,12 @@ export function CategoryManager() {
   useEffect(() => {
     const subscription = DataStore.observe(Category).subscribe(async (_) => {
       setCategories(await DataStore.query(Category));
-      return subscription.unsubscribe();
+      return () => {
+        console.log("Unsubscribing");
+        subscription.unsubscribe();
+      };
     });
-  });
+  }, []);
 
   const insertCategory = async () => {
     let input = document.getElementById("categoryName") as HTMLInputElement;
@@ -24,10 +27,10 @@ export function CategoryManager() {
   };
 
   const categoryListItems = categories.map((c) => (
-    <div>
+    <li key={c.id}>
       {c.name}
       <button onClick={async (e) => await deleteCategory(c)}>Delete</button>
-    </div>
+    </li>
   ));
 
   return (
