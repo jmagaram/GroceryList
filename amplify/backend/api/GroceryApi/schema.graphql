@@ -1,0 +1,6 @@
+type Category @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  order: Int
+}
+ 
