@@ -9,7 +9,6 @@ export function CategoryManager() {
     const subscription = DataStore.observe(Category).subscribe(async (_) => {
       setCategories(await DataStore.query(Category));
       return () => {
-        console.log("Unsubscribing");
         subscription.unsubscribe();
       };
     });
